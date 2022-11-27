@@ -134,7 +134,7 @@ public class RedeSocial {
 			System.out.print("Digite a hora(hh:mm): ");
 			p.hora = entrada.nextLine().trim();
 
-			System.out.print("Digite o post: ");
+			System.out.print("Digite o conteúdo: ");
 			p.post = entrada.nextLine().trim();
 
 			Validar.postar(p);
