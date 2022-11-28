@@ -13,12 +13,9 @@ public class RedeSocial {
 	static int indexPost = -1;
 
 	public static void main(String[] args) {
-		System.out.print("\r\n"
-				+ "  _____         _   ____           _   \r\n"
-				+ " |_   ______  _| |_|  _ \\ ___  ___| |_ \r\n"
-				+ "   | |/ _ \\ \\/ | __| |_) / _ \\/ __| __|\r\n"
-				+ "   | |  __/>  <| |_|  __| (_) \\__ | |_ \r\n"
-				+ "   |_|\\___/_/\\_\\\\__|_|   \\___/|___/\\__|\r\n"
+		System.out.print("\r\n" + "  _____         _   ____           _   \r\n"
+				+ " |_   ______  _| |_|  _ \\ ___  ___| |_ \r\n" + "   | |/ _ \\ \\/ | __| |_) / _ \\/ __| __|\r\n"
+				+ "   | |  __/>  <| |_|  __| (_) \\__ | |_ \r\n" + "   |_|\\___/_/\\_\\\\__|_|   \\___/|___/\\__|\r\n"
 				+ "\r\n");
 
 		while (!fechar) {
@@ -155,12 +152,16 @@ public class RedeSocial {
 
 	static void exibirTimeline() {
 		System.out.println("\n-- Timeline --");
-		if (indexPost > -1) {
-			for (int i = 0; i <= indexPost; i++) {
+		int qtdePosts = 0;
+		for (int i = 0; i < perfilLogado.posts.length; i++) {
+			if (perfilLogado.posts[i] != null) {
 				System.out.printf("%s às %s -- \"%s\"\n\n", perfilLogado.posts[i].data, perfilLogado.posts[i].hora,
 						perfilLogado.posts[i].post);
+				qtdePosts++;
 			}
-		} else {
+		}
+
+		if (qtdePosts == 0) {
 			System.out.println("Nenhum post encontrado.");
 		}
 	}
