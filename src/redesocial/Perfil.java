@@ -6,6 +6,5 @@ public class Perfil {
 	public String login;
 	public String senha;
 	public Post[] posts = new Post[100];
-	
 
 }

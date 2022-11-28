@@ -11,6 +11,6 @@ public class EmptyStringException extends RuntimeException {
 
 	@Override
 	public String getMessage() {
-		return String.format("O campo %s precisa ser preenchido.", this.nomeDoAtributo);
+		return String.format("\nO campo %s precisa ser preenchido.", this.nomeDoAtributo);
 	}
 }

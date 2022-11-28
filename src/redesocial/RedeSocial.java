@@ -13,9 +13,12 @@ public class RedeSocial {
 	static int indexPost = -1;
 
 	public static void main(String[] args) {
-		System.out.print("\r\n" + "  _____         _   ____           _   \r\n"
-				+ " |_   ______  _| |_|  _ \\ ___  ___| |_ \r\n" + "   | |/ _ \\ \\/ | __| |_) / _ \\/ __| __|\r\n"
-				+ "   | |  __/>  <| |_|  __| (_) \\__ | |_ \r\n" + "   |_|\\___/_/\\_\\\\__|_|   \\___/|___/\\__|\r\n"
+		System.out.print("\r\n"
+				+ "  _____         _   ____           _   \r\n"
+				+ " |_   ______  _| |_|  _ \\ ___  ___| |_ \r\n"
+				+ "   | |/ _ \\ \\/ | __| |_) / _ \\/ __| __|\r\n"
+				+ "   | |  __/>  <| |_|  __| (_) \\__ | |_ \r\n"
+				+ "   |_|\\___/_/\\_\\\\__|_|   \\___/|___/\\__|\r\n"
 				+ "\r\n");
 
 		while (!fechar) {
@@ -37,10 +40,10 @@ public class RedeSocial {
 		} else if (opcao.equals("E")) {
 			entrar();
 		} else if (opcao.equals("F")) {
-			System.out.println("Obrigado por nos visitar. Até logo!");
+			System.out.println("\nObrigado por nos visitar. Até logo!");
 			fechar = true;
 		} else {
-			System.out.println("Opção inválida!");
+			System.out.println("\nOpção inválida!");
 		}
 	}
 
@@ -56,7 +59,7 @@ public class RedeSocial {
 			logado = false;
 			System.out.println("\nLogout realizado com sucesso!");
 		} else {
-			System.out.println("Opção inválida.");
+			System.out.println("\nOpção inválida.");
 		}
 	}
 
@@ -90,6 +93,10 @@ public class RedeSocial {
 			System.out.println(e.getMessage());
 		} catch (HasSpaceException e) {
 			System.out.println(e.getMessage());
+		} catch (InvalidCharacterException e) {
+			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Erro inexperado!");
 		}
 	}
 
@@ -110,8 +117,12 @@ public class RedeSocial {
 
 		} catch (UserNotFoundException e) {
 			System.out.println(e.getMessage());
+		}catch (EmptyStringException e) {
+			System.out.println(e.getMessage());
 		} catch (InvalidPasswordException e) {
 			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Erro inexperado!");
 		}
 	}
 
@@ -132,13 +143,13 @@ public class RedeSocial {
 			p.hora = entrada.nextLine().trim();
 
 			System.out.print("Digite o conteúdo: ");
-			p.post = entrada.nextLine().trim();
+			p.conteudo = entrada.nextLine().trim();
 
 			Validar.postar(p);
 
 			indexPost++;
 			perfilLogado.posts[indexPost] = p;
-			System.out.println("Post criado com sucesso!");
+			System.out.println("\nPost criado com sucesso!");
 		} catch (EmptyStringException e) {
 			System.out.println(e.getMessage());
 		} catch (InvalidDateException e) {
@@ -147,22 +158,28 @@ public class RedeSocial {
 			System.out.println(e.getMessage());
 		} catch (LimitCharacterException e) {
 			System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Erro inexperado!");
 		}
 	}
 
 	static void exibirTimeline() {
-		System.out.println("\n-- Timeline --");
-		int qtdePosts = 0;
-		for (int i = 0; i < perfilLogado.posts.length; i++) {
-			if (perfilLogado.posts[i] != null) {
-				System.out.printf("%s às %s -- \"%s\"\n\n", perfilLogado.posts[i].data, perfilLogado.posts[i].hora,
-						perfilLogado.posts[i].post);
-				qtdePosts++;
+		try {
+			System.out.println("\n-- Timeline --");
+			int qtdePosts = 0;
+			for (int i = 0; i < perfilLogado.posts.length; i++) {
+				if (perfilLogado.posts[i] != null) {
+					System.out.printf("%s às %s -- \"%s\"\n\n", perfilLogado.posts[i].data, perfilLogado.posts[i].hora,
+							perfilLogado.posts[i].conteudo);
+					qtdePosts++;
+				}
 			}
-		}
 
-		if (qtdePosts == 0) {
-			System.out.println("Nenhum post encontrado.");
+			if (qtdePosts == 0) {
+				System.out.println("Nenhum post encontrado.");
+			}
+		} catch (Exception e) {
+			System.out.println("Erro inexperado!");
 		}
 	}
 }

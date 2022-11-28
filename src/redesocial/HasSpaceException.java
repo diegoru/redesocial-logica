@@ -11,6 +11,6 @@ public class HasSpaceException extends RuntimeException {
 
 	@Override
 	public String getMessage() {
-		return String.format("O campo %s não pode possuir espaço.", this.nomeDoAtributo);
+		return String.format("\nO campo %s não pode possuir espaço.", this.nomeDoAtributo);
 	}
 }

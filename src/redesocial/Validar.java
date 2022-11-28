@@ -17,6 +17,8 @@ public class Validar {
 			throw new LimitCharacterException("Login", 2);
 		} else if (hasSpace(perfil.login)) {
 			throw new HasSpaceException("login");
+		} else if (!validaCaracter(perfil.login)) {
+			throw new InvalidCharacterException("Login");			
 		}
 
 		if (perfil.senha == null || perfil.senha.trim().isEmpty() || perfil.senha.isBlank()) {
@@ -76,9 +78,9 @@ public class Validar {
 			throw new InvalidTimeException();
 		}
 
-		if (post.post == null || post.post.trim().isEmpty() || post.post.isBlank()) {
+		if (post.conteudo == null || post.conteudo.trim().isEmpty() || post.conteudo.isBlank()) {
 			throw new EmptyStringException("post");
-		} else if (!tamanhoPost(post.post, 4)) {
+		} else if (!tamanhoPost(post.conteudo, 4)) {
 			throw new LimitCharacterException("Post", 4);
 		}
 	}
@@ -133,6 +135,25 @@ public class Validar {
 					.concat(arrumaTexto[i].substring(1).toLowerCase()) + " ";
 		}
 		return textoArrumado.trim();
+	}
+	
+	static boolean validaCaracter(String texto) {		
+		char[] invalidos = {'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï',
+			    'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï',
+			    'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ'};		
+
+		for(Character c: texto.toCharArray()) {
+			if (!c.equals('_') && !c.equals('.') && !Character.isDigit(c) && !Character.isLetter(c)) {
+				return false;				
+			} else {
+				for (int j = 0; j < invalidos.length; j++) {
+					if (c.equals(invalidos[j])) {
+						return false;											
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	static boolean validaData(String data) {

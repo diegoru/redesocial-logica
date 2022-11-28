@@ -13,6 +13,6 @@ public class LimitCharacterException extends RuntimeException {
 	
 	@Override
 	public String getMessage() {
-		return String.format("%s deve possuir no mínimo %d caracteres.", this.nomeDoAtributo, this.qtdeCharacterMin);	
+		return String.format("\n%s deve possuir no mínimo %d caracteres.", this.nomeDoAtributo, this.qtdeCharacterMin);	
 	}	
 }

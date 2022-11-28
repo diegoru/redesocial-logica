@@ -11,6 +11,6 @@ public class OnlyLetterException extends RuntimeException {
 	
 	@Override
 	public String getMessage() {
-		return String.format("O campo %s só deve possuir letras.", this.nomeDoAtributo);
+		return String.format("\nO campo %s só deve possuir letras.", this.nomeDoAtributo);
 	}	
 }
